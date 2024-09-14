@@ -1,18 +1,21 @@
 // Purpose: Controller for tasks
 // Model: id, title, description, completed = false, created_at = new Date()
+
+const { v4: uuidv4 } = require('uuid');
+
 let tasks = [
     {
-        id: 1,
+        id: "1",
         title: 'Tarea 1',
         description: 'Descripcion de la Tarea 1',
     },
     {
-        id: 2,
+        id: "2",
         title: 'Tarea 2',
         description: 'Descripcion de la Tarea 2',
     },
     {
-        id: 3,
+        id: "3",
         title: 'Tarea 3',
         description: 'Descripcion de la Tarea 3',
     }
@@ -26,7 +29,7 @@ function getAllTasks() {
 // Create a new task
 function createTask(title, description) {
     const newTask = {
-        id: tasks.length + 1,
+        id: uuidv4(),
         title,
         description
     }
@@ -53,9 +56,15 @@ function updateTask(id, title, description) {
     return tasks;
 }
 
+// buscar por id
+function getTaskById(id) {
+    return tasks.find(task => task.id === id);
+}
+
 module.exports = {
     getAllTasks,
     createTask,
     deleteTask,
-    updateTask
+    updateTask,
+    getTaskById
 }
