@@ -23,11 +23,17 @@ let tasks = [
 
 // Get all tasks
 function getAllTasks() {
+    if (!tasks) {
+        return null;
+    }
     return tasks;
 }
 
 // Create a new task
 function createTask(title, description) {
+    if (!title || !description) {
+        return null;
+    }
     const newTask = {
         id: uuidv4(),
         title,
@@ -39,11 +45,16 @@ function createTask(title, description) {
 
 // delete a task
 function deleteTask(id) {
+    if (!id) {
+        return null;
+    }
     const index = tasks.findIndex(task => task.id === id);
     if (index !== -1) {
         tasks.splice(index, 1);
+        return tasks;
+    } else {
+        return null;
     }
-    return tasks;
 }
 
 // update task
@@ -52,13 +63,19 @@ function updateTask(id, title, description) {
     if (index !== -1) {
         tasks[index].title = title;
         tasks[index].description = description;
+        return tasks;
+    } else {
+        return null;
     }
-    return tasks;
 }
 
 // buscar por id
 function getTaskById(id) {
-    return tasks.find(task => task.id === id);
+    let task = tasks.find(task => task.id === id);
+    if (!task) {
+        return null;
+    }
+    return task;
 }
 
 module.exports = {
